@@ -1,0 +1,5 @@
+name = Ajax Link Test
+description = A simple Ajax link example
+package = Our modules
+core = 7.x
+scripts[] = ajax_link.js
