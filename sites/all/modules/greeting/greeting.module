@@ -1,0 +1,19 @@
+<?php
+
+function greeting_menu() {
+  $items['welcome'] = array(
+    'title' => 'Welcome',
+    'page callback' => 'welcome',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+function welcome() {
+  return "<h2>Welcome to our CD Store!</h2>";
+}
+
+function greeting_user_login() {
+  $_GET['destination'] = 'welcome';
+}

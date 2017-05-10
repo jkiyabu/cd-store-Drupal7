@@ -1,0 +1,61 @@
+<?php
+
+class GreetingTests extends DrupalWebTestCase {
+  protected $privilegedUser;
+
+  public static function getInfo() {
+    return array(
+      'name' => 'Greeting',
+      'description' => 'Tests greeting on login module',
+      'group' => 'Greeting group',
+    );
+  }
+
+  public function setUp() {
+    parent::setUp(array('greeting', 'artist'));
+
+    $user = $this->drupalCreateAdminUser();
+    $this->drupalLogin($user);
+    $this->createArtistTest();
+  }
+
+  public function drupalCreateAdminUser(array $permissions = array()) {
+    $roles = user_roles();
+    $index = array_search('administrator', $roles);
+    $user = $this->drupalCreateUser($permissions);
+    $user->roles[$index] = 'administrator';
+    return user_save($user);
+  }
+
+  public function drupalCreateAuthenticatedUser(array $permissions = array()) {
+    $roles = user_roles();
+    $index = array_search('authenticated', $roles);
+    $user = $this->drupalCreateUser($permissions);
+    $user->roles[$index] = 'authenticated';
+    return user_save($user);
+  }
+
+  public function createArtistTest() {
+    $info = array();
+    $info['title'] = "Testing!";
+    $info["field_bio[und][0][value]"] = "1, 2, 3!";
+
+    $this->drupalPost('node/add/artist', $info, t('Save'));
+
+    $path['source'] = 'node/1';
+    $path['alias'] = 'artisttest';
+    path_save($path);
+  }
+
+  public function testGreeting() {
+    $user = $this->drupalCreateAuthenticatedUser();
+    $this->drupalLogin($user);
+    $this->assertText('Welcome to our CD Store!', 'This page content is present.');
+  }
+
+  public function testNewArtist() {
+    $this->drupalGet('artisttest');
+
+    $this->assertText("1, 2, 3!", 'The text on the page is correct');
+  }
+}

@@ -1,5 +1,5 @@
-name = My Ajax Node Loader
-description = Display Nodes with Ajax.
+name = My Ajax Review Loader
+description = Display Album Reviews with Ajax.
 package = Our modules
 core = 7.x
 files[] = mymodule.module

@@ -1,0 +1,19 @@
+<?php
+
+class CreateArtistTestCase extends DrupalWebTestCase {
+  protected $privilegedUser;
+
+  public static function getInfo() {
+    return array(
+      'name' => 'Create Artist Test',
+      'description' => 'Ensure that create artist content type functions properly',
+      'group' => 'Custom tests',
+    );
+  }
+
+  public function setUp() {
+    $this->privilegedUser = $this->drupalCreateUser(array('create artist content', 'extra special edit any simpletest_example'));
+    $this->drupalLogin($this->privilegedUser);
+  }
+
+}

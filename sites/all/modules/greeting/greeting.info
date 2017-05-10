@@ -1,0 +1,5 @@
+name = Greeting
+description = Directs to welcome page on login
+core = 7.x
+package = Our modules
+files[] = tests/greeting.test
