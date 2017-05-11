@@ -1,0 +1,61 @@
+<?php
+
+function cd_quiz_menu() {
+  $items['quiz'] = array(
+    'title' => 'Music Questionaire',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('quiz_form1'),
+    'access callback' => TRUE,
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  $items['quiz_results'] = array(
+    'title' => 'What should I eat!?',
+    'title' => 'Quiz Results!',
+    'page callback' => 'quiz_success',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+function quiz_form1() {
+  $form['genre'] = array(
+    '#title' => 'Favorite Genre',
+    '#type' => 'radios',
+    '#options' => array(
+      'country' => t('Country'),
+      'rap' => t('Rap'),
+      'rock' => t('Rock'),
+      'pop' => t('Pop'),
+    ),
+    '#required' => TRUE,
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'submit',
+  );
+
+  return $form;
+}
+
+function quiz_form1_submit($form, &$form_state) {
+  $input = $form_state['values']['genre'];
+  $_SESSION['genre'] = $input;
+  $form_state['redirect'] = 'quiz_results';
+}
+
+function quiz_success() {
+  $input = $_SESSION['genre'];
+  if ($input == 'country') {
+    return "<p>Check out our review of Johnny Cash's Unchained!</p>";
+  } elseif ($input == 'rap') {
+    return "<p>Check out our review of Nas's Stillmatic!</p>";
+  } elseif ($input == 'pop') {
+    return "<p>Check out our review of Michael Jackson's Thriller!</p>";
+  } elseif ($input == 'rock') {
+    return "<p>Check out our review of Prince's Purple Rain!</p>";
+  }
+}

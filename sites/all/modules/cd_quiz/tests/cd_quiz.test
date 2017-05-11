@@ -1,0 +1,65 @@
+<?php
+
+class CdQuizTestCase extends DrupalUnitTestCase
+{
+
+  public static function getInfo()
+  {
+    return array(
+      'name' => 'CD quiz unit tests',
+      'description' => 'Test that quiz returns result',
+      'group' => 'Our custom tests',
+    );
+  }
+
+  function testCdQuiz()
+  {
+    //English description
+    //displays desired result during test
+    $description = 'a returned value should return pop suggestion';
+    //Arrange
+    $input = 'pop';
+    $_SESSION['genre'] = $input;
+    //Act
+    $result = quiz_success();
+    //Assert
+    $expected_output = "<p>Check out our review of Michael Jackson's Thriller!</p>";
+    $this->assertEqual($result, $expected_output, $description);
+
+    //English description
+    //displays desired result during test
+    $description = 'a returned value should return country suggestion';
+    //Arrange
+    $input = 'country';
+    $_SESSION['genre'] = $input;
+    //Act
+    $result = quiz_success();
+    //Assert
+    $expected_output = "<p>Check out our review of Johnny Cash's Unchained!</p>";
+    $this->assertEqual($result, $expected_output, $description);
+
+    //English description
+    //displays desired result during test
+    $description = 'a returned value should return rap suggestion';
+    //Arrange
+    $input = 'rap';
+    $_SESSION['genre'] = $input;
+    //Act
+    $result = quiz_success();
+    //Assert
+    $expected_output = "<p>Check out our review of Nas's Stillmatic!</p>";
+    $this->assertEqual($result, $expected_output, $description);
+
+    //English description
+    //displays desired result during test
+    $description = 'a returned value should return rock suggestion';
+    //Arrange
+    $input = 'rock';
+    $_SESSION['genre'] = $input;
+    //Act
+    $result = quiz_success();
+    //Assert
+    $expected_output = "<p>Check out our review of Prince's Purple Rain!</p>";
+    $this->assertEqual($result, $expected_output, $description);
+  }
+}

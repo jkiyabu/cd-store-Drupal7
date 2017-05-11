@@ -1,0 +1,6 @@
+name = CD Quiz
+description = Ask for favorite music genre
+package = Our modules
+core = 7.x
+files[] = cd_quiz.module
+files[] = tests/cd_quiz.test
